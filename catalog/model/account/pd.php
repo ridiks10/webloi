@@ -258,7 +258,7 @@ class ModelAccountPd extends Model {
 		$query = $this -> db -> query("
 			SELECT id as pd_number, status
 			FROM ". DB_PREFIX . "customer_provide_donation
-			WHERE customer_id = ".$customer_id." and filled = ".$amount."
+			WHERE customer_id = ".$customer_id." and package = ".$amount."
 		");
 		return $query -> row;
 	}

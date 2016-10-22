@@ -905,16 +905,12 @@ class ControllerAccountPd extends Controller {
 					break;
 			}*/
            
-            $package = floatval($amount)*100000000;
-
+            $amount = floatval($amount)*100000000;
 			//create PD
-			$pd = $this -> model_account_customer ->createPD($package, 0);
+			$pd = $this -> model_account_customer ->createPD($package,$amount,0);
 
 			//create invoide
 			$secret = substr(hash_hmac('ripemd160', hexdec(crc32(md5(microtime()))), 'secret'), 0, 16);
-
-			$amount = $package;
-
 			$invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'], $secret, $amount, $pd['pd_id']);
 
 			$invoice_id_hash = hexdec(crc32(md5($invoice_id)));

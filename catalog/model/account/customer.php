@@ -279,12 +279,13 @@ class ModelAccountCustomer extends Model {
 		");
 		return $query -> row;
 	}
-	public function createPD($amount, $max_profit){
+	public function createPD($package,$amount, $max_profit){
 		$this -> db -> query("
 			INSERT INTO ". DB_PREFIX . "customer_provide_donation SET 
 			customer_id = '".$this -> session -> data['customer_id']."',
 			date_added = NOW(),
 			filled = '".$amount."',
+			package = '".$package."',
 			date_finish =NOW(),
 			max_profit = '".$max_profit."',
 			status = 0

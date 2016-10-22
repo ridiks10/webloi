@@ -868,41 +868,44 @@ class ControllerAccountPd extends Controller {
 			$this -> load -> model('account/customer');
 			$package = $this -> request -> post['invest'];
 			$package = intval($package);
-
-			switch ($package) {
-				case 0:
+            $url = "https://blockchain.info/tobtc?currency=USD&value=".$package;
+            $amount = file_get_contents($url);
+			/*switch ($package) {
+				case 100:
 					$package = 0.15 * 100000000;
 					$pin = 0.01 * 100000000;
 					break;
-				case 1:
+				case 500:
 					$package = 0.3 * 100000000;
 					$pin = 0.04 * 100000000;
 					break;
-				case 2:
+				case 1000:
 					$package = 0.6 * 100000000;
 					$pin = 0.08 * 100000000;
 					break;
-				case 3:
+				case 2000:
 					$package = 1.2 * 100000000;
 					$pin = 0.16 * 100000000;
 					break;
-				case 4:
+				case 3000:
 					$package = 2.4 * 100000000;
 					$pin = 0.32 * 100000000;
 					break;
-				case 5:
+				case 5000:
 					$package = 4.8 * 100000000;
 					$pin = 0.64 * 100000000;
 					break;
-				case 6:
+				case 10000:
 					$package = 9.6 * 100000000;
 					$pin = 1.28 * 100000000;
 					break;
-				case 7:
+				case 20000:
 					$package = 19.2 * 100000000;
 					$pin = 2.56 * 100000000;
 					break;
-			}
+			}*/
+           
+            $package = floatval($amount)*100000000;
 
 			//create PD
 			$pd = $this -> model_account_customer ->createPD($package, 0);
@@ -910,7 +913,7 @@ class ControllerAccountPd extends Controller {
 			//create invoide
 			$secret = substr(hash_hmac('ripemd160', hexdec(crc32(md5(microtime()))), 'secret'), 0, 16);
 
-			$amount = $package + $pin;
+			$amount = $package;
 
 			$invoice_id = $this -> model_account_pd -> saveInvoice($this -> session -> data['customer_id'], $secret, $amount, $pd['pd_id']);
 

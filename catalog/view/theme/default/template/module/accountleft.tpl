@@ -5,8 +5,8 @@
            <img alt="" src="img/samples/scarlet-159.png"/>
            <div class="user-box">
               <span class="name">
-              Welcome<br/>
-              Scarlett
+              Welcome
+            
               </span>
               <span class="status">
               <i class="fa fa-circle"></i> Online

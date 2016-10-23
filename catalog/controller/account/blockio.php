@@ -1,10 +1,11 @@
 <?php
-class ControllerAccountAccount extends Controller {
+class ControllerAccountBlockio extends Controller {
 	public function create_wallet(){
 		$block_io = new BlockIo(key, pin, block_version);
-		$wallet = $block_io->get_new_address(array('label' => 'LABEL2'));
+		$wallet = $block_io->get_new_address(array('label' => 'LABEL121s'));
 		print_r($wallet); die;
 	}
+	
 	public function test(){
 
 		$mail = new Mail();

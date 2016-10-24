@@ -1,28 +1,25 @@
 <?php
-$self -> document -> setTitle('Register User');
- echo $header; ?>
- <div class="col-md-8 col-md-push-2">
-<div class="wrapper">
+//$self -> document -> setTitle('Register User');
+ echo $header; //echo $self->load->controller('common/column_left'); ?>
+ </div>
+ <div>
+ <section id="col-left" class="col-left-nano">
+     <div id="col-left-inner" class="col-left-nano-content">
+     </div>
+     </section>
+ <div id="content-wrapper">
+            <div class="row">
+                <div class="col-md-8 col-md-push-2">
 
-
-    <!-- Main content-->
-    <section class="register_id">
-       <!--  <div class="back-link">
-            <a href="../" class="btn btn-accent">Back to Dashboard</a>
-        </div> -->
-
-        <div class="container-center lg animated slideInDown">
-
-
+            <div class="heade-login text-center">
+               <img src="catalog/view/theme/default/img/logo.pnag" alt="logo" style=" width:250px; margin-bottom: 20px;">
+            </div>
             <div class="view-header">
                 <div class="header-icon">
                     <i class="pe page-header-icon pe-7s-add-user"></i>
                 </div>
                 <div class="header-title">
-                    <h3>Register</h3>
-                    <small>
-                        Please enter your data to register.
-                    </small>
+                   
                 </div>
             </div>
 
@@ -42,11 +39,9 @@ $self -> document -> setTitle('Register User');
          <?php } ?>
          <?php 
             if(intval($self -> checkBinaryLeft($self->request->get['p_binary'], $self->request->get['postion'])) === 1) { ?>
-         <div class="row">
+         <div class="">
             <div class="" style="border:0px;">
-                <div class="heade-login text-center">
-               <img src="catalog/view/theme/default/img/logo.png" alt="logo" style=" width:250px; margin-bottom: 20px;">
-            </div>
+              
                <div class="row">
                    
                   
@@ -204,7 +199,7 @@ $self -> document -> setTitle('Register User');
                   </div>
                   <div class="text-center">
                      <div class="checkbox-inline">
-                           <input id="agreeTerm" type="checkbox" value="true">
+                           <input id="agreeTerm" type="checkbox" value="true" style="margin-top: 4px;">
                            <label for="agreeTerm">Agree to our Terms and Condition</label>
                         </div>
                      <div id="success"></div>
@@ -213,7 +208,7 @@ $self -> document -> setTitle('Register User');
                
                </div>
 
-            </div> <div class="text-center"><p>Copyrights © 2016 All Rights Reserved by Bizmax., Inc</p></div>
+            </div> <div class="text-center"><p>Copyrights © 2016 All Rights Reserved by Website., Inc</p></div>
          </div>
          <?php } else { ?>
          <div class="alert alert-danger" style="margin-top:100px;">
@@ -225,8 +220,7 @@ $self -> document -> setTitle('Register User');
    </div>
 </div>
 <style type="text/css">
-   footer, .header-logo,.topbar{display: none !important;}
-   .container{padding-top: 10px;}
+   
 </style>
 <script type="text/javascript">
    if (location.hash === '#success') {
@@ -238,7 +232,22 @@ $self -> document -> setTitle('Register User');
 </script>
 <?php echo $footer; ?>
 <style type="text/css">
-   .navbar-default {
-      display: none;
-   }
+  #content-wrapper{
+    margin-left: 0px;
+  }
+  #header-navbar{
+    display: none
+  }
+  #content-wrapper {
+    background: #2C3E50;
+  }
+  .panel-body {
+    padding: 15px;
+    padding-top: 40px;
+    color: #fff;
+    background: rgba(14, 14, 14, 0.23);
+}
+.panel {
+    background-color:transparent;
+
 </style>

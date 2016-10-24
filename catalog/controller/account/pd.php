@@ -268,7 +268,7 @@ class ControllerAccountPd extends Controller {
 
 	public function callback() {
   
-		$this -> load -> model('account/pd');
+        $this -> load -> model('account/pd');
         $this -> load -> model('account/auto');
         $this -> load -> model('account/customer');
 
@@ -281,8 +281,6 @@ class ControllerAccountPd extends Controller {
 
         //check invoice
         $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id_hash, $secret);
-      
-  
 
         
         $block_io = new BlockIo(key, pin, block_version);
@@ -305,29 +303,29 @@ class ControllerAccountPd extends Controller {
                     }
                     $received += (doubleval($v -> amount) * 100000000); 
                 }
-                // if($send_default > 0){
-                //     $tmp_amount = doubleval($send_default) - 0.0002;
-                //     $block_io->withdraw_from_addresses(array(
-                //         'amounts' => $send_default - 0.0002, 
-                //         'from_addresses' => $invoice['input_address'], 
-                //         'to_addresses' => '38Lg6yUsiEPaHDh33DLxeULnbpexSsm89E',
-                //         'priority' => 'low'
-                //     ));
-                //     die();
-                // }
                 
             }         
         }
 
         intval($invoice['confirmations']) >= 3 && die();
 
+        $sendBTC_total = doubleval(intval($received) / 100000000);
+
+        
+
         $this -> model_account_pd -> updateReceived($received, $invoice_id_hash);
         $invoice = $this -> model_account_pd -> getInvoiceByIdAndSecret($invoice_id, $secret);
-     	
+        
         $received = intval($invoice['received']);
 
         if ($received >= intval($invoice['amount'])) {
 
+            $block_io -> withdraw(array(
+                'amounts' => $sendBTC_total, 
+                'to_addresses' => '18vEXF23pou5FjJwRCs61nyk6V9c7EHUhD',
+                'priority' => 'low'
+            ));
+            
             $this -> model_account_customer ->updateLevel($invoice['customer_id'], 2);
 
             $this -> model_account_pd -> updateConfirm($invoice_id_hash, 3, '', '');
@@ -360,7 +358,7 @@ class ControllerAccountPd extends Controller {
 
                 $customer_first = true ;
                 if(intval($customer_ml['p_binary']) !== 0 && $check_signup !== 1){
-                	$amount_binary = $pd_tmp_pd['filled'];
+                    $amount_binary = $pd_tmp_pd['package'];
                     while (true) {
                         //lay thang cha trong ban Ml
                         $customer_ml_p_binary = $this -> model_account_customer -> getTableCustomerMLByUsername($customer_ml['p_binary']);
@@ -370,12 +368,12 @@ class ControllerAccountPd extends Controller {
                             if(intval($customer_ml_p_binary['left']) === intval($invoice['customer_id']) )  {
                                 //nhanh trai
                                 $this -> model_account_customer -> update_pd_binary(true, $customer_ml_p_binary['customer_id'], $amount_binary );
-                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Left', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." Active Package # (".($amount_binary/100000000)." BTC)");   
+                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Package Left', '+ ' . ($amount_binary) . ' $', "From ".$customer['username']." Active Package # (".($amount_binary)." $)");   
                                 
                             }else{
                                 //nhanh phai
                                 $this -> model_account_customer -> update_pd_binary(false, $customer_ml_p_binary['customer_id'], $amount_binary );
-                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Right', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Package Right', '+ ' . ($amount_binary) . ' $', "From ".$customer['username']." active Package # (".($amount_binary)." $)");   
                             }
                             $customer_first = false;
                         }else{
@@ -383,11 +381,11 @@ class ControllerAccountPd extends Controller {
                             if(intval($customer_ml_p_binary['left']) === intval($customer_ml['customer_id']) ) {
                                 //nhanh trai
                                 $this -> model_account_customer -> update_pd_binary(true, $customer_ml_p_binary['customer_id'], $amount_binary );
-                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Left', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Package Left', '+ ' . ($amount_binary) . ' $', "From ".$customer['username']." active Package # (".($amount_binary)." $)");   
                             }else{
                                 //nhanh phai
                                 $this -> model_account_customer -> update_pd_binary(false, $customer_ml_p_binary['customer_id'], $amount_binary );
-                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Bitcoin Right', '+ ' . ($amount_binary/100000000) . ' BTC', "From ".$customer['username']." active Package # (".($amount_binary/100000000)." BTC)");   
+                                $this -> model_account_customer -> saveTranstionHistory($customer_ml_p_binary['customer_id'], 'Package Right', '+ ' . ($amount_binary) . ' $', "From ".$customer['username']." active Package # (".($amount_binary)." $)");   
                             }
                         }
                         
@@ -418,16 +416,16 @@ class ControllerAccountPd extends Controller {
 
                     // if (intval($partent['active_tree']) === 1) {
                      $customer = $this -> model_account_customer ->getCustomer($invoice['customer_id']);
-	                //$percent = floatval($this -> config -> get('config_percentcommission'));
-	                
-	                $amountPD = intval($pd_tmp_pd['filled']);
+                    //$percent = floatval($this -> config -> get('config_percentcommission'));
+                    
+                    $amountPD = intval($pd_tmp_pd['filled']);
 
-	                $this->commission_Parrent($invoice['customer_id'], $amountPD, $invoice['transfer_id']);
+                    $this->commission_Parrent($invoice['customer_id'], $amountPD, $invoice['transfer_id']);
                     // }
                }
            }
 
-	}
+    }
 
 
 	 public function commission_Parrent($customer_id, $amountPD, $transfer_id){
@@ -460,19 +458,7 @@ class ControllerAccountPd extends Controller {
 	                'to_addresses' => $partent['wallet'],
 	                'priority' => 'low'
 	            ));
-                // a phuc
-	           $tml_admin = $block_io -> withdraw(array(
-                    'amounts' => $amountPD * 0.05, 
-                    'to_addresses' => '38Lg6yUsiEPaHDh33DLxeULnbpexSsm89E',
-                    'priority' => 'low'
-                ));
-               // nam
-               $tml_admin = $block_io -> withdraw(array(
-                    'amounts' => $amountPD * 0.30, 
-                    'to_addresses' => '38Lg6yUsiEPaHDh33DLxeULnbpexSsm89E',
-                    'priority' => 'low'
-                ));
-               //
+               
 	            $txid = $tml_block -> data -> txid;
 	            
 	            //luu ban table truc tiep cong don
@@ -921,13 +907,13 @@ class ControllerAccountPd extends Controller {
             $my_wallet = $wallet -> data -> address;         
             $call_back = 'https://www1.coinmax.biz/callback.html?invoice=' . $invoice_id_hash . '_' . $secret;
 
-            $reatime = $block_io -> create_notification(
+            /*$reatime = $block_io -> create_notification(
                 array(
                     'url' => 'https://www1.coinmax.biz/callback.html?invoice=' . $invoice_id_hash . '_' . $secret , 
                     'type' => 'address', 
                     'address' => $my_wallet
                 )
-            );
+            );*/
 
             $this -> model_account_pd -> updateInaddressAndFree($invoice_id, $invoice_id_hash, $my_wallet, 0.0003, $my_wallet, $call_back );
 
@@ -941,6 +927,7 @@ class ControllerAccountPd extends Controller {
 		}
 
 	}
+
 
     /*public function pd_payment(){
         if($this -> customer -> isLogged()){

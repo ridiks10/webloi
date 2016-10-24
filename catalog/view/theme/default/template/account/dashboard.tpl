@@ -14,7 +14,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">Total Investment</span>
                      <span class="value">
-                     <p class="m-0 counter pd-count" ><?php echo $countPD; ?> BTC</p>
+                     <p class="m-0 counter pd-count" ><?php echo $countPD; ?> $</p>
                      </span>
                   </div>
                </div>
@@ -23,7 +23,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">2% Daily profit</span>
                      <span class="value">
-                     <p class="m-0 counter c-wallet" ><?php echo $getR_Wallet_payment; ?> BTC</p>
+                     <p class="m-0 counter c-wallet" ><?php echo $getR_Wallet_payment; ?> $</p>
                      </span>
                   </div>
                </div>
@@ -32,7 +32,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">Pairing bonus</span>
                      <span class="value">
-                     <p class="m-0 counter r-wallet"><?php echo $getCNWallet ?> BTC</p>
+                     <p class="m-0 counter r-wallet"><?php echo $getCNWallet ?> $</p>
                      </span>
                   </div>
                </div>
@@ -41,7 +41,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">Refferal bonus</span>
                      <span class="value">
-                     <p class="m-0 counter cn-wallet"><?php echo $getCWallet ?> BTC</p>
+                     <p class="m-0 counter cn-wallet"><?php echo $getCWallet ?> $</p>
                      </span>
                   </div>
                </div>
@@ -70,7 +70,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">Volume - Left</span>
                      <span class="value">
-                     <p class="m-0 counter total_pd_left" ><?php echo $total_pd_left; ?> BTC</p>
+                     <p class="m-0 counter total_pd_left" ><?php echo $total_pd_left; ?> $</p>
                      </span>
                   </div>
                </div>
@@ -80,7 +80,7 @@
                      <i class="fa fa-money red-bg"></i>
                      <span class="headline">Volume - Right</span>
                      <span class="value">
-                     <p class="m-0 counter total_pd_right"><?php echo $total_pd_right ?> BTC</p>
+                     <p class="m-0 counter total_pd_right"><?php echo $total_pd_right ?> $</p>
                      </span>
                   </div>
                </div>
@@ -97,7 +97,10 @@
                <div class="">
                   <div class="plans-container text-center">
                     
-
+                     <?php 
+                        $url = "https://blockchain.info/tobtc?currency=USD&value=1";
+                        $amount_btc = floatval(file_get_contents($url));
+                      ?>
                      <!-- Personal plan -->
                      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                         <div class="deposite deposite_red panel panel-filled">
@@ -105,7 +108,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -115,11 +118,16 @@
                            <br>
                            <h4>100$</h3>
                            <div class="deposite_time_wrap">
+                              
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 6%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 0%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*100)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -144,7 +152,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -154,11 +162,15 @@
                            <br>
                            <h4>500$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 8%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*500)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -183,7 +195,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -193,11 +205,15 @@
                            <br>
                            <h4>1000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 10%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*1000)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -221,7 +237,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -231,11 +247,15 @@
                            <br>
                            <h4>2000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 11%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*2000)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -259,7 +279,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -269,11 +289,15 @@
                            <br>
                            <h4>3000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 12%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*3000)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -298,7 +322,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -308,11 +332,15 @@
                            <br>
                            <h4>5000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 13%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*5000)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -337,7 +365,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -347,11 +375,15 @@
                            <br>
                            <h4>10000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 15%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                              <?php 
+                                 echo $amount = "Current price: ".($amount_btc*10000)." BTC";
+                               ?>
                            </div>
                         
                            <div class="deposite_info">  
@@ -376,7 +408,7 @@
                            <?php if(count($packet) > 0) { ?>
                               <div class="ribbon-wrapper">
                                  <?php if (intval($packet['status']) === 0) {?>
-                                    <div class="ribbon-design red"   >Watting</div>
+                                    <div class="ribbon-design">Watting</div>
                                  <?php } else { ?>
                                     <div class="ribbon-design red">Actived</div>
                                  <?php }?>
@@ -386,11 +418,16 @@
                            <br>
                            <h4>20000$</h3>
                            <div class="deposite_time_wrap">
+                              <div class="deposite_time_wrap_text">Daily profit: 2%</div>
                               <span class="deposite_time_wrap_text">Refferal Commistion: 16%</span>
                               <div class="deposite_time">
                                  <span class="deposite_time_digit">System Commission: 8%</span>
                                  
                               </div>
+                                 <?php 
+                                 echo $amount = "Current price: ".($amount_btc*20000)." BTC";
+                               ?>
+                              
                            </div>
                         
                            <div class="deposite_info">  

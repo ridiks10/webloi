@@ -401,6 +401,15 @@ class ModelAccountCustomer extends Model {
 
 		return $query -> row;
 	}
+	public function getTotalPDpackage($id_customer){
+		$query = $this -> db -> query("
+			SELECT sum(package) AS number
+			FROM  ".DB_PREFIX."customer_provide_donation 
+			WHERE status = 1 AND customer_id = '".$this -> db -> escape($id_customer)."'
+		");
+
+		return $query -> row;
+	}
 	public function getTableCustomerMLByUsername($customer_id){
 		$query = $this -> db -> query("
 			SELECT *

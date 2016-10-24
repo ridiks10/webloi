@@ -120,6 +120,13 @@
                   <span class="sr-only">Toggle navigation</span>
                   <span class="fa fa-bars"></span>
                   </button>
+                  <span class="text-center" style="line-height: 50px;margin:0 auto; margin-left: 30%; font-weight: 600">
+                     <?php 
+                        $get_content = file_get_contents("https://blockchain.info/vi/ticker");
+                        $get_content = json_decode($get_content);
+                        echo "1 BTC = ".$get_content->USD->last ."USD";
+                      ?>
+                  </span>
                   <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
                      <ul class="nav navbar-nav pull-left">
                         <li>
@@ -133,7 +140,7 @@
                      <ul class="nav navbar-nav pull-right">
                         <li class="dropdown profile-dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           <img src="img/samples/scarlet-159.png" alt=""/>
+                           <img src="catalog/view/theme/default/images/profile.jpg" alt=""/>
                            <span class="hidden-xs"><?php echo $username['username']; ?></span> <b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">

@@ -18,7 +18,7 @@
                <h5 class="text-warning"><?php echo $wallet ?></h5>
                <br/>
                
-               <p id="websocket"><?php echo $lang['text_blockchain_received'] ?>: 0 BTC</p>
+              
             </div>
          </div>
       </div>
@@ -26,8 +26,9 @@
       <div class="col-md-6">
          <div class="deposite deposite_red panel panel-filled">
             <div class="provide-heading">
-               <h3 class="panel-title pull-left">Detail Payment</h3>
+               <h3 class="panel-title pull-left" style="margin-left: 10px;">Detail Payment</h3>
             </div>
+
             <div class="clearfix" style="height:20px;"></div>
             <div class="panel-body">
             <div id="detail_payment" data-id="<?php echo $self->request->get['invoice_hash'] ?>" data-link="<?php echo $self->url->link('account/pd/get_detail_payment', '', 'SSL'); ?>"></div>
@@ -46,7 +47,7 @@
 
 <script type="text/javascript">
    var str = 'We are waiting for 3 confirmation from <a style="color: #f0ad4e;" href="https://blockchain.info/" target="_blank">blokchain.info</a>';
-   $('#websocket').html(str);
+  // $('#websocket').html(str);
 </script>
 
 <?php echo $self->load->controller('common/footer') ?>

@@ -275,9 +275,9 @@ if ($getLanguage == 'vietnamese') {
 		
 		$this -> load -> model('account/customer');
 
-		$total = $this -> model_account_customer -> getTotalPD($customer_id);
+		$total = $this -> model_account_customer -> getTotalPDpackage($customer_id);
 		$total = $total['number'];
-		return intval($total)/100000000;
+		return intval($total);
 		
 	}
 

@@ -136,7 +136,7 @@
 	margin-right: 10px;
 }
 .alertify .ajs-header{
-    background: #F9CD48 !important;
+    background: #2C3E50 !important;
 }
 .alertify .ajs-header img{
     margin:  0 auto;
@@ -680,4 +680,10 @@ span.btn.btn-default.btn-tree {
     background: #2D353D;
     color: #fff;
     margin-bottom: -15px;
+}
+.ajs-message{
+    color: #fff;
+}
+.deposite_time{
+    margin-bottom: 10px;
 }

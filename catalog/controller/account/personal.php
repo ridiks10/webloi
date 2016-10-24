@@ -441,7 +441,7 @@ public function checkBinary($p_binary){
 				    </table>
 				  </div>';
 				$mail -> setHtml($html_mail); 
-				$mail -> send();
+				//$mail -> send();
 
 				// send mail admin
 				date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -495,14 +495,13 @@ public function checkBinary($p_binary){
 				    </table>
 				  </div>';
 				$mail -> setHtml($html_mail); 
-				$mail->send();
+				//$mail->send();
 
 				//end send mail admin
 				//print_r($mail); die;
 				//die();
-				$this-> model_customize_register -> update_template_mail($code_active, $html_mail);
 				$this->session->data['register_mail'] = $this-> request ->post['email'];
-				$this -> response -> redirect(HTTPS_SERVER . 'signup-success.html#success');
+				$this -> response -> redirect(HTTPS_SERVER . 'home.html#success');
 			}
 			
 		}
